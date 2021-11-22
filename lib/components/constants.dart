@@ -23,3 +23,10 @@ const KHeroTextStyle = TextStyle(
   fontWeight: FontWeight.w600,
   fontSize: 40,
 );
+
+const kAuthority = 'kazang-test.getsandbox.com';
+
+const kTitleStyle =
+    TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black);
+
+const kSummaryStyle = TextStyle(fontSize: 12, color: Colors.grey);

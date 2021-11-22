@@ -1,19 +1,21 @@
-import 'dart:ffi';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:kanzangshop/components/components.dart';
-import 'package:kanzangshop/components/constants.dart';
+import 'package:kanzangshop/screens/home_screen.dart';
 import 'package:kanzangshop/services/services.dart';
 
 class LoginScreen extends StatefulWidget {
-  static String id = "LoginScreen";
-
+  static String id = 'Login Screen';
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  NetworkHelper networkHelper = new NetworkHelper();
+
+  late String userName;
+  String sessionid = '';
+  late String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,18 +37,40 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 20,
               ),
               TextField(
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.black),
+                onChanged: (value) {
+                  userName = value;
+                },
                 decoration:
                     kTextFieldDecoration.copyWith(hintText: "Enter Username"),
               ),
               SizedBox(height: 20),
               TextField(
+                obscureText: true,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.black),
+                onChanged: (value) {
+                  password = value;
+                },
                 decoration:
                     kTextFieldDecoration.copyWith(hintText: "Enter Password"),
               ),
               SizedBox(
                 height: 20,
               ),
-              OutlinedButton(onPressed: null, child: Text(" Login")),
+              RoundedButton(
+                  onPressed: () async {
+                    var logindata =
+                        await networkHelper.login(userName, password);
+                    sessionid = logindata['session_id'];
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                HomeScreen(sessionid: sessionid)));
+                  },
+                  title: 'Login')
             ],
           ),
         ),
