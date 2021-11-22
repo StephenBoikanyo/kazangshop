@@ -1,0 +1,20 @@
+
+Kazangshop Documentation
+
+** Task
+        - Kazang flutter assignment:
+        - Retrive a list of product from API and display according to assignment scope
+
+** How to run the project:
+  To run this project, in the root directory of this project run the command in the terminal
+  > flutter run
+
+** How to create a build for this project:
+   To create a build for this project, in the root directory of this project  run the following on the command line:
+   >flutter build apk   --release
+   or
+   >flutter build bundle --release
+
+** How to run tests on the project:
+   - To run tests for this project ...
+
