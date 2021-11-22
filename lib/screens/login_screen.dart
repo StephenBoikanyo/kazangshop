@@ -15,6 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
   late String userName;
   String sessionid = '';
   late String password;
+  bool showSpinner = false;
 
   @override
   Widget build(BuildContext context) {

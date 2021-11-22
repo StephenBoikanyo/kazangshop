@@ -28,12 +28,50 @@ class _HomeScreenState extends State<HomeScreen> {
     return products;
   }
 
+  Icon searchIcon = const Icon(Icons.search);
+  Widget searchBar = const Text('KazangShop');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text('KazangShop'),
           centerTitle: true,
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+              icon: searchIcon,
+              onPressed: () {
+                setState(() {
+                  if (searchIcon.icon == Icons.search) {
+                    searchIcon = const Icon(Icons.cancel);
+                    searchBar = const ListTile(
+                      leading: Icon(
+                        Icons.search,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                      // h*AHRiUC5pnM#M
+                      title: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Search Product...',
+                          hintStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontStyle: FontStyle.italic,
+                          ),
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    );
+                  }
+                });
+              },
+            )
+          ],
         ),
         body: Container(
             child: Card(
@@ -71,3 +109,41 @@ class _HomeScreenState extends State<HomeScreen> {
         )));
   }
 }
+
+// class ProductListStream extends StatelessWidget {
+//   const ProductListStream({Key? key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return StreamBuilder<Productmodel>(
+//       builder: (context, snapshot) {
+//         if (!snapshot.hasData) {
+//           return Center(
+//             child: CircularProgressIndicator(
+//               backgroundColor: Colors.green,
+//             ),
+//           );
+//         } else {
+//           return GridView.builder(
+//               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+//                 maxCrossAxisExtent: 200,
+//                 childAspectRatio: 4 / 6,
+//               ),
+//               itemCount: snaphot.data!.length,
+//               itemBuilder: (context, index) {
+//                 return ProductTile(
+//                     productImage: snaphot.data![index].logo,
+//                     productTitle: snaphot.data![index].name,
+//                     productSummary: snaphot.data![index].summary,
+//                     onPressed: () => Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                             builder: (context) => ProductDetails(
+//                                 product: snaphot.data![index],
+//                                 sessionid: widget.sessionid))));
+//               });
+//         }
+//       },
+//     );
+//   }
+// }
